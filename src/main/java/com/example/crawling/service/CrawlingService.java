@@ -56,30 +56,27 @@ public class CrawlingService {
                 System.out.println(element.getText());
             }
 
-            List<WebElement> webElement
-                    = webDriver.findElements(By.cssSelector("#search > ul > li.on > div > ul > li"));
+            WebElement webElement
+                    = webDriver.findElement(By.xpath("//*[@id=\"search\"]/ul/li[1]/div/ul/li[2]/a"));
 
-            for (WebElement element : webElement) {
-                System.out.println("----------------------------");
-                System.out.println(element.getText());
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            System.out.println(webElement.getText());
 
-                if(element.getText().equals("적 금")) {
-
-                    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
-                    javascriptExecutor.executeScript("arguments[0].click();", element);
-                }
+            if(webElement.getText().equals("적 금")) {
+                JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
+                javascriptExecutor.executeScript("arguments[0].click();", webElement);
             }
+
+            Thread.sleep(2000);
 
             List<WebElement> saving
                     = webDriver.findElements(By.cssSelector("#contents > div.banking-content > div.banking-row-area > div.wrap-product-list > ul"));
+                    //= webDriver.findElements(By.className("item type2"));
 
-            for (WebElement element : deposit) {
-                System.out.println("----------------------------");
+            for (WebElement element : saving) {
+                System.out.println("@@@@@@@@@@@@@@@@@@");
                 System.out.println(element.getText());
-            }
-
-
-            //System.out.println(webElement);
+            };
 
             webDriver.quit();
         } catch (Exception e){
